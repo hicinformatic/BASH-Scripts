@@ -19,7 +19,7 @@ upt=${upt[0]}
 
 # JSON FORMAT
 
-$(cat $dir/json/server.json.tpl > $json)
+$(cat $dir/json/server.json > $json)
 $(sed -i "s/#{CPU}#/$load/g" $json)
 $(sed -i "s/#{MEM}#/$mem/g" $json)
 $(sed -i "s/#{UPTIME}#/$upt/g" $json)
