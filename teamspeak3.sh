@@ -1,5 +1,6 @@
 #!/bin/bash
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+workfile="teamspeak3_workfile.txt"
 source $dir/config/teamspeak3.config 
 
 # DATAS
@@ -16,6 +17,24 @@ mem=${mem[0]}
 # UPTIME
 upt=${datas[2]}
 
+# WORKFILE
+SLEEP=1
+
+{
+        sleep $SLEEP
+        echo "login $user $password"
+        sleep $SLEEP
+        echo "use sid=1"
+        sleep $SLEEP
+        echo "clientlist"
+        sleep $SLEEP
+        echo "quit"
+} | nc  localhost $port > "$dir/$workfile"
+
+# NUMBER USERS
+nbr=$(grep -o "client_nickname" "$dir/$workfile" | tail -n +2 | wc -l)
+
 echo $cpu
 echo $mem
 echo $upt
+echo $nbr
