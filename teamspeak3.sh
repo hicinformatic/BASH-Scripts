@@ -59,5 +59,6 @@ else
     $(sed -i "s/#{STATUS}#/on/g" $jsontmp)
 fi
 
+$(chown $user:$group $jsontmp)
 $(chmod $chmod $jsontmp)
 $(mv $jsontmp $json)
