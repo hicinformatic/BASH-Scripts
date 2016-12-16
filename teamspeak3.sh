@@ -34,7 +34,13 @@ SLEEP=1
 
 # NUMBER USERS
 $(sed ':a;N;$!ba;s/|/\n/g' "$dir/$workfile" | grep "client_nickname" > "$dir/$workfile2")
-nbr=$(grep -o "client_nickname" "$dir/$workfile" | tail -n +2 | wc -l)
+$(rm -f "$dir/$workfile")
+nbr=$(grep -cv $user "$dir/$workfile2")
+
+for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' teamspeak3_last.txt | grep -v $user`
+do
+    echo $u
+done
 
 echo $cpu
 echo $mem
