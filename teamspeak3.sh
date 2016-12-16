@@ -45,5 +45,5 @@ $(sed -i "s/#{USERS}#/$nbr/g" $json)
 
 for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' teamspeak3_last.txt | grep -v $user`
 do
-    $(sed -i "s/#{LIST}#/$u\n        #{LIST}#/g" $json)
+    $(sed -i "s/#{LIST}#/'$u',\n        #{LIST}#/g" $json)
 done
