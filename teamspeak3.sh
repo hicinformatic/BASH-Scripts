@@ -37,18 +37,13 @@ $(sed ':a;N;$!ba;s/|/\n/g' "$dir/$workfile" | grep "client_nickname" > "$dir/$wo
 $(rm -f "$dir/$workfile")
 nbr=$(grep -cv $user "$dir/$workfile2")
 
-for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' teamspeak3_last.txt | grep -v $user`
-do
-    echo $u
-done
-
-echo $cpu
-echo $mem
-echo $upt
-echo $nbr
-
 $(cat $dir/json/teamspeak3.json > $json)
 $(sed -i "s/#{CPU}#/$cpu/g" $json)
 $(sed -i "s/#{MEM}#/$mem/g" $json)
 $(sed -i "s/#{UPTIME}#/$upt/g" $json)
 $(sed -i "s/#{USERS}#/$nbr/g" $json)
+
+for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' teamspeak3_last.txt | grep -v $user`
+do
+    $(sed -i "s/#{LIST}#/$u\n        #{LIST}#/g" $json)
+done
