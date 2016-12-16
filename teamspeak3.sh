@@ -24,7 +24,7 @@ SLEEP=1
 
 {
         sleep $SLEEP
-        echo "login $user $password"
+        echo "login $ts3user $password"
         sleep $SLEEP
         echo "use sid=1"
         sleep $SLEEP
@@ -36,7 +36,7 @@ SLEEP=1
 # NUMBER USERS
 $(sed ':a;N;$!ba;s/|/\n/g' $dir/$workfile | grep "client_nickname" > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
-nbr=$(grep -cv $user $dir/$workfile2)
+nbr=$(grep -cv $ts3user $dir/$workfile2)
 
 $(cat $dir/json/teamspeak3.json > $jsontmp)
 $(sed -i "s/#{CPU}#/$cpu/g" $jsontmp)
@@ -44,10 +44,20 @@ $(sed -i "s/#{MEM}#/$mem/g" $jsontmp)
 $(sed -i "s/#{UPTIME}#/$upt/g" $jsontmp)
 $(sed -i "s/#{USERS}#/$nbr/g" $jsontmp)
 
-for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $user`
+for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
 do
     $(sed -i "s/#{LIST}#/'$u',\n        #{LIST}#/g" $jsontmp)
 done
+$(rm -f $dir/$workfile2)
 $(sed -i '/        #{LIST}#/d' $jsontmp)
 
+if [ $cpu -gt 90 ] || [ $mem -gt 90 ] ; then
+    $(sed -i "s/#{STATUS}#/off/g" $jsontmp)
+elif [ $cpu -gt 60 ] || [ $mem -gt 60 ] ; then
+    $(sed -i "s/#{STATUS}#/warning/g" $jsontmp)
+else
+    $(sed -i "s/#{STATUS}#/on/g" $jsontmp)
+fi
+
+$(chmod $chmod $jsontmp)
 $(mv $jsontmp $json)
