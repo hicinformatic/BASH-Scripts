@@ -43,7 +43,8 @@ $(sed -i "s/#{MEM}#/$mem/g" $json)
 $(sed -i "s/#{UPTIME}#/$upt/g" $json)
 $(sed -i "s/#{USERS}#/$nbr/g" $json)
 
-for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' teamspeak3_last.txt | grep -v $user`
+for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $user`
 do
     $(sed -i "s/#{LIST}#/'$u',\n        #{LIST}#/g" $json)
 done
+$(sed '/        #{LIST}#/d' $dir/$workfile2)
