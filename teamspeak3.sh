@@ -46,3 +46,9 @@ echo $cpu
 echo $mem
 echo $upt
 echo $nbr
+
+$(cat $dir/json/server.json > $json)
+$(sed -i "s/#{CPU}#/$cpu/g" $json)
+$(sed -i "s/#{MEM}#/$mem/g" $json)
+$(sed -i "s/#{UPTIME}#/$upt/g" $json)
+$(sed -i "s/#{USERS}#/$nbr/g" $json)
