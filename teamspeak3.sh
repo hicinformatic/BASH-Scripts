@@ -1,6 +1,7 @@
 #!/bin/bash
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 workfile="teamspeak3_workfile.txt"
+workfile2="teamspeak3_last.txt"
 source $dir/config/teamspeak3.config 
 
 # DATAS
@@ -32,6 +33,7 @@ SLEEP=1
 } | nc  localhost $port > "$dir/$workfile"
 
 # NUMBER USERS
+$(sed ':a;N;$!ba;s/|/\n/g' "$dir/$workfile" | grep "client_nickname" > "$dir/$workfile2")
 nbr=$(grep -o "client_nickname" "$dir/$workfile" | tail -n +2 | wc -l)
 
 echo $cpu
