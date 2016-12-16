@@ -47,4 +47,4 @@ for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | 
 do
     $(sed -i "s/#{LIST}#/'$u',\n        #{LIST}#/g" $json)
 done
-$(sed '/        #{LIST}#/d' $dir/$workfile2)
+$(sed '/        #{LIST}#/d' $json)
