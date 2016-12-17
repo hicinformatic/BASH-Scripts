@@ -46,10 +46,14 @@ $(sed -i "s/#{USERS}#/$nbr/g" $jsontmp)
 
 for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
 do
-    $(sed -i "s/#{LIST}#/'$u',\n        #{LIST}#/g" $jsontmp)
+    if [ -z "$user" ]
+    then
+        $(sed -i "s/#{LIST}#/\"$user\",\n        #{LIST}#/g" $jsontmp)
+    fi
+    user=$u
 done
+$(sed -i "s/#{LIST}#/\"$user\"/g" $jsontmp)
 $(rm -f $dir/$workfile2)
-$(sed -i '/        #{LIST}#/d' $jsontmp)
 
 if [ $cpu -gt 90 ] || [ $mem -gt 90 ] ; then
     $(sed -i "s/#{STATUS}#/off/g" $jsontmp)
