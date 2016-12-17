@@ -2,5 +2,5 @@
     "cpu": #{CPU}#,
     "mem": #{MEM}#,
     "uptime": #{UPTIME}#,
-    "status": "#{STATUS}#",
+    "status": "#{STATUS}#"
 }
