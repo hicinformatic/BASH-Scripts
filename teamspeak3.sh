@@ -46,7 +46,7 @@ $(sed -i "s/#{USERS}#/$nbr/g" $jsontmp)
 
 for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
 do
-    if [ -z "$client" ]
+    if [ -n "$client" ]
     then
         $(sed -i "s/#{LIST}#/\"$client\",\n        #{LIST}#/g" $jsontmp)
     fi
