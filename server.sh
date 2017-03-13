@@ -8,10 +8,10 @@ $(cat $dir/json/server.json > $jsontmp)
 # UPTIME
 uptime=($(cat /proc/uptime))
 uptime=${upt[1]}
-$(sed -i "s/#{UPTIME}#/$upt/g" $jsontmp)
+$(sed -i "s/#{UPTIME}#/$uptime/g" $jsontmp)
 
 # CPU
-for i in `top -b -n1 | grep Cpu | awk '{print $4}' | grep -Eo '[0-9]{1,3}'`
+for c in `top -b -n1 | grep Cpu | awk '{print $4}' | grep -Eo '[0-9]{1,3}'`
 do
     if [ -n "$pscpu" ]
     then
