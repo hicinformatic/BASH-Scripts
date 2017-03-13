@@ -1,19 +1,19 @@
 #!/bin/bash
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $dir/config/server.config 
-gunicorntmp='server.json.tmp'
+jsontmp='django.json.tmp'
 
+
+$(cat $dir/json/django.json > $jsontmp)
 
 # CPU
 for i in `ps -u django -o %cpu --no-headers`
 do
-    cpu=$(( $cpu + $i ))
+    $(sed -i "s/#{CPU}#/\"$i\",\n        #{CPU}#/g" $jsontmp)
 done
-echo $cpu
 
 # MEM
-for i in `ps -u django -o %mem --no-headers`
+for i in `ps -u django -o %cpu --no-headers`
 do
-    mem=$(( $cpu + $i ))
+    $(sed -i "s/#{MEM}#/\"$i\",\n        #{MEM}#/g" $jsontmp)
 done
-echo $mem
