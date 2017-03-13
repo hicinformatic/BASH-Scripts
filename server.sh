@@ -16,7 +16,7 @@ mem=$(awk '/^Mem/ {printf("%u", 100*$3/$2);}' <(free -m))
 
 # UPTIME
 upt=($(cat /proc/uptime))
-upt=${upt[0]}
+upt=${upt[1]}
 
 # JSON FORMAT
 
