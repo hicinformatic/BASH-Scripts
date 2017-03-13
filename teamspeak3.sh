@@ -15,16 +15,12 @@ uptime=${datas[2]}
 $(sed -i "s/#{UPTIME}#/$uptime/g" $jsontmp)
 
 # CPU
-cpu=($(echo ${datas[0]} | grep -Eo '[0-9]{1,3}'))
-cpu=${cpu[0]}
+cpu=${datas[0]}
 $(sed -i "s/#{CPU}#/$cpu/g" $jsontmp)
 
 # MEMORY
-mem=($(echo ${datas[1]}  | grep -Eo '[0-9]{1,3}'))
-mem=${mem[0]}
+mem=${datas[1]}
 $(sed -i "s/#{MEM}#/$mem/g" $jsontmp)
-
-
 
 # WORKFILE
 SLEEP=1
