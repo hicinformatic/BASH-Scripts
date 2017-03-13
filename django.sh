@@ -9,5 +9,11 @@ for i in `ps -u django -o %cpu --no-headers | grep -Eo '[0-9]{1,3}'`
 do
     cpu=$(( $cpu + $i ))
 done
-
 echo $cpu
+
+# MEM
+for i in `ps -u django -o %mem --no-headers | grep -Eo '[0-9]{1,3}'`
+do
+    mem=$(( $cpu + $i ))
+done
+echo $mem
