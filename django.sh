@@ -3,7 +3,6 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $dir/config/django.config 
 jsontmp="$djangouser.json.tmp"
 
-echo $user
 $(cat $dir/json/django.json > $jsontmp)
 
 # UPTIME
