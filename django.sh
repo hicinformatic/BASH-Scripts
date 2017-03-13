@@ -9,7 +9,7 @@ $(cat $dir/json/django.json > $jsontmp)
 # CPU
 for c in `ps -u django -o %cpu --no-headers`
 do
-    if [ -n "$psmem" ]
+    if [ -n "$pscpu" ]
     then
         $(sed -i "s/#{CPU}#/\"$pscpu\",\n        #{CPU}#/g" $jsontmp)
     fi
