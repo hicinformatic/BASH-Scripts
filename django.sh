@@ -11,9 +11,11 @@ for i in `ps -u django -o %cpu --no-headers`
 do
     $(sed -i "s/#{CPU}#/\"$i\",\n        #{CPU}#/g" $jsontmp)
 done
+ $(sed -i "s/#{CPU}#//g" $jsontmp)
 
 # MEM
-for i in `ps -u django -o %cpu --no-headers`
+for i in `ps -u django -o %mem --no-headers`
 do
     $(sed -i "s/#{MEM}#/\"$i\",\n        #{MEM}#/g" $jsontmp)
 done
+ $(sed -i "s/#{MEM}#//g" $jsontmp)
