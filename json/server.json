@@ -1,6 +1,9 @@
 {
-    "cpu": #{CPU}#,
-    "mem": #{MEM}#,
     "uptime": #{UPTIME}#,
-    "status": "#{STATUS}#"
+    "cpu": [
+        #{CPU}#
+    ],
+    "mem": [
+        #{MEM}#
+    ]
 }
