@@ -1,10 +1,12 @@
 {
-    "cpu": #{CPU}#,
-    "mem": #{MEM}#,
     "uptime": #{UPTIME}#,
-    "users": #{USERS}#,
-    "list": [
-        #{LIST}#
+    "cpu": [
+        #{CPU}#
     ],
-    "status": "#{STATUS}#"
+    "mem": [
+        #{MEM}#
+    ],
+    "users": [
+        #{LIST}#
+    ]
 }
