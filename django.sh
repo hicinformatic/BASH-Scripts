@@ -7,15 +7,23 @@ jsontmp='django.json.tmp'
 $(cat $dir/json/django.json > $jsontmp)
 
 # CPU
-for i in `ps -u django -o %cpu --no-headers`
+for c in `ps -u django -o %cpu --no-headers`
 do
-    $(sed -i "s/#{CPU}#/\"$i\",\n        #{CPU}#/g" $jsontmp)
+    if [ -n "$psmem" ]
+    then
+        $(sed -i "s/#{CPU}#/\"$i\",\n        #{CPU}#/g" $jsontmp)
+    fi
+    pscpu=$c
 done
- $(sed -i "s/#{CPU}#//g" $jsontmp)
+$(sed -i "s/#{CPU}#/\"$pscpu\"/g" $jsontmp)
 
 # MEM
-for i in `ps -u django -o %mem --no-headers`
+for m in `ps -u django -o %mem --no-headers`
 do
-    $(sed -i "s/#{MEM}#/\"$i\",\n        #{MEM}#/g" $jsontmp)
+    if [ -n "$psmem" ]
+    then
+        $(sed -i "s/#{MEM}#/\"$i\",\n        #{MEM}#/g" $jsontmp)
+    fi
+    psmem=$m
 done
- $(sed -i "s/#{MEM}#//g" $jsontmp)
+$(sed -i "s/#{MEM}#/\"$psmem\"/g" $jsontmp)
