@@ -7,7 +7,7 @@ $(cat $dir/json/server.json > $jsontmp)
 
 # UPTIME
 uptime=($(cat /proc/uptime))
-uptime=${upt[1]}
+uptime=${uptime[1]}
 $(sed -i "s/#{UPTIME}#/$uptime/g" $jsontmp)
 
 # CPU
