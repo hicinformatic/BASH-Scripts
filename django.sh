@@ -11,7 +11,7 @@ for c in `ps -u django -o %cpu --no-headers`
 do
     if [ -n "$psmem" ]
     then
-        $(sed -i "s/#{CPU}#/\"$i\",\n        #{CPU}#/g" $jsontmp)
+        $(sed -i "s/#{CPU}#/\"$pscpu\",\n        #{CPU}#/g" $jsontmp)
     fi
     pscpu=$c
 done
@@ -22,7 +22,7 @@ for m in `ps -u django -o %mem --no-headers`
 do
     if [ -n "$psmem" ]
     then
-        $(sed -i "s/#{MEM}#/\"$i\",\n        #{MEM}#/g" $jsontmp)
+        $(sed -i "s/#{MEM}#/\"$psmem\",\n        #{MEM}#/g" $jsontmp)
     fi
     psmem=$m
 done
