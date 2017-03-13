@@ -12,7 +12,7 @@ datas=($(ps -u teamspeak3 -o %cpu,%mem,etimes --no-headers))
 
 # UPTIME
 uptime=${datas[2]}
-$(sed -i "s/#{UPTIME}#/$upt/g" $jsontmp)
+$(sed -i "s/#{UPTIME}#/$uptime/g" $jsontmp)
 
 # CPU
 cpu=($(echo ${datas[0]} | grep -Eo '[0-9]{1,3}'))
