@@ -5,14 +5,14 @@ gunicorntmp='server.json.tmp'
 
 
 # CPU
-for i in `ps -u django -o %cpu --no-headers | grep -Eo '[0-9]{1,3}'`
+for i in `ps -u django -o %cpu --no-headers`
 do
     cpu=$(( $cpu + $i ))
 done
-echo $(($cpu/10))
+echo $cpu
 
 # MEM
-for i in `ps -u django -o %mem --no-headers | grep -Eo '[0-9]{1,3}'`
+for i in `ps -u django -o %mem --no-headers`
 do
     mem=$(( $cpu + $i ))
 done
