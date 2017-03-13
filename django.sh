@@ -1,6 +1,6 @@
 #!/bin/bash
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $dir/config/server.config 
+source $dir/config/django.config 
 jsontmp="$user.json.tmp"
 
 echo $user
