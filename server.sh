@@ -2,7 +2,6 @@
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $dir/config/server.config 
 jsontmp='server.json.tmp'
-
 $(cat $dir/json/server.json > $jsontmp)
 
 # UPTIME
@@ -11,7 +10,7 @@ uptime=${uptime[1]}
 $(sed -i "s/#{UPTIME}#/$uptime/g" $jsontmp)
 
 # CPU
-for c in `top -b -n1 | grep Cpu | awk '{print $4}' | grep -Eo '[0-9]{1,3}'`
+for c in `ps -axo %cpu --no-headers`
 do
     if [ -n "$pscpu" ]
     then
@@ -22,8 +21,15 @@ done
 $(sed -i "s/#{CPU}#/\"$pscpu\"/g" $jsontmp)
 
 # MEM
-mem=$(awk '/^Mem/ {printf("%u", 100*$3/$2);}' <(free -m))
-$(sed -i "s/#{MEM}#/$mem/g" $jsontmp)
+for m in `ps -axo %mem --no-headers`
+do
+    if [ -n "$psmem" ]
+    then
+        $(sed -i "s/#{MEM}#/\"$psmem\",\n        #{MEM}#/g" $jsontmp)
+    fi
+    psmem=$m
+done
+$(sed -i "s/#{MEM}#/\"$psmem\"/g" $jsontmp)
 
 $(chown $user:$group $jsontmp)
 $(chmod $chmod $jsontmp)
