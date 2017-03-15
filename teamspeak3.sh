@@ -47,7 +47,11 @@ do
     fi
     client=$u
 done
-$(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
+if [ ! -z "$client" ] ; then
+    $(sed -i "s/\"#{LIST}#\"/\"$client\"/g" $jsontmp)
+elif
+    $(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
+fi
 $(rm -f $dir/$workfile2)
 
 $(chown $user:$group $jsontmp)
