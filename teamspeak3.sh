@@ -47,9 +47,10 @@ do
     fi
     client=$u
 done
-if [ ! -z "$client" ] ; then
+if [ ! -z "$client" ]
+then
     $(sed -i "s/\"#{LIST}#\"/\"$client\"/g" $jsontmp)
-elif
+else
     $(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
 fi
 $(rm -f $dir/$workfile2)
