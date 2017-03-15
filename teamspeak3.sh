@@ -47,9 +47,9 @@ do
     fi
     client=$u
 done
-if [ ! -z "$client" ]
+if [ -z "$client" ]
 then
-    $(sed -i "s/\"#{LIST}#\"/\"$client\"/g" $jsontmp)
+    $(sed -i "s/\"#{LIST}#\"//g" $jsontmp)
 else
     $(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
 fi
