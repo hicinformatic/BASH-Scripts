@@ -1,16 +1,15 @@
 #!/bin/bash
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $dir/config/django.config 
-jsontmp="$djangouser.json.tmp"
-
+jsontmp="$sysuser.json.tmp"
 $(cat $dir/json/django.json > $jsontmp)
 
 # UPTIME
-uptime=$(ps -u $djangouser -o etimes,cmd | grep "$bind" | awk '{print $1}' | head -n1)
+uptime=$(ps -u $sysuser -o etimes,cmd | grep "$bind" | awk '{print $1}' | head -n1)
 $(sed -i "s/#{UPTIME}#/\"$uptime\"/g" $jsontmp)
 
 # CPU
-for c in `ps -u $djangouser -o %cpu --no-headers`
+for c in `ps -u $sysuser -o %cpu --no-headers`
 do
     if [ -n "$pscpu" ]
     then
@@ -21,7 +20,7 @@ done
 $(sed -i "s/#{CPU}#/\"$pscpu\"/g" $jsontmp)
 
 # MEM
-for m in `ps -u $djangouser -o %mem --no-headers`
+for m in `ps -u $sysuser -o %mem --no-headers`
 do
     if [ -n "$psmem" ]
     then

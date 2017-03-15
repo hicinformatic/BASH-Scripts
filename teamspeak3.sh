@@ -2,25 +2,35 @@
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 workfile='teamspeak3_workfile.txt'
 workfile2='teamspeak3_last.txt'
-jsontmp='teamspeak3.json.tmp'
 source $dir/config/teamspeak3.config 
-
+jsontmp="$sysuser.json.tmp"
 $(cat $dir/json/teamspeak3.json > $jsontmp)
 
-# DATAS
-datas=($(ps -u teamspeak3 -o %cpu,%mem,etimes --no-headers))
-
 # UPTIME
-uptime=${datas[2]}
-$(sed -i "s/#{UPTIME}#/$uptime/g" $jsontmp)
+uptime=$(ps -u $sysuser -o etimes,cmd | grep "$bind" | awk '{print $1}' | head -n1)
+$(sed -i "s/#{UPTIME}#/\"$uptime\"/g" $jsontmp)
 
 # CPU
-cpu=${datas[0]}
-$(sed -i "s/#{CPU}#/$cpu/g" $jsontmp)
+for c in `ps -u $sysuser -o %cpu --no-headers`
+do
+    if [ -n "$pscpu" ]
+    then
+        $(sed -i "s/#{CPU}#/\"$pscpu\",\n        #{CPU}#/g" $jsontmp)
+    fi
+    pscpu=$c
+done
+$(sed -i "s/#{CPU}#/\"$pscpu\"/g" $jsontmp)
 
-# MEMORY
-mem=${datas[1]}
-$(sed -i "s/#{MEM}#/$mem/g" $jsontmp)
+# MEM
+for m in `ps -u $sysuser -o %mem --no-headers`
+do
+    if [ -n "$psmem" ]
+    then
+        $(sed -i "s/#{MEM}#/\"$psmem\",\n        #{MEM}#/g" $jsontmp)
+    fi
+    psmem=$m
+done
+$(sed -i "s/#{MEM}#/\"$psmem\"/g" $jsontmp)
 
 # WORKFILE
 SLEEP=1
