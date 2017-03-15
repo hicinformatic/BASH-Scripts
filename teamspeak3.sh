@@ -49,7 +49,7 @@ do
 done
 if [ -z "$client" ]
 then
-    $(sed -i "s/\"#{LIST}#\"//g" $jsontmp)
+    $(sed -i "s/#{LIST}#//g" $jsontmp)
 else
     $(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
 fi
