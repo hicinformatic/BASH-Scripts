@@ -31,7 +31,7 @@ done
 $(sed -i "s/#{MEM}#/\"$psmem\"/g" $jsontmp)
 
 # USERS
-$(sed -i "s/#{LIST}#/\"Gyn\"/g" $jsontmp)
+# $(sed -i "s/#{LIST}#/\"Gyn\"/g" $jsontmp)
 
 $(chown $user:$group $jsontmp)
 $(chmod $chmod $jsontmp)
