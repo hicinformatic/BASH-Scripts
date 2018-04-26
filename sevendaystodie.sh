@@ -37,7 +37,7 @@ SLEEP=1
 
 {
         sleep $SLEEP
-        echo "listplayers" > 'test.txt'
+        echo "listplayers"
         sleep $SLEEP
         echo "exit"
 } | nc  localhost $port > $dir/$workfile
