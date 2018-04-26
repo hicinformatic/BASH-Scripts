@@ -44,7 +44,6 @@ SLEEP=1
 
 # NUMBER USERS
 $(sed -e '1,15d' < $dir/$workfile > $dir/$workfile2)
-$(sed ':a;N;$!ba;s/|/\n/g' $dir/$workfile | grep "client_nickname" > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
 #for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
 #do
@@ -60,7 +59,7 @@ $(rm -f "$dir/$workfile")
 #else
 #    $(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
 #fi
-#$(rm -f $dir/$workfile2)
+$(rm -f $dir/$workfile2)
 
 $(chown $user:$group $jsontmp)
 $(chmod $chmod $jsontmp)
