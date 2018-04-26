@@ -33,20 +33,16 @@ done
 $(sed -i "s/#{MEM}#/\"$psmem\"/g" $jsontmp)
 
 # WORKFILE
-#SLEEP=1
-#
-#{
-#        sleep $SLEEP
-#        echo "login $ts3user $password"
-#        sleep $SLEEP
-#        echo "use sid=1"
-#        sleep $SLEEP
-#        echo "clientlist"
-#        sleep $SLEEP
-#        echo "quit"
-#} | nc  localhost $port > $dir/$workfile
-#
-## NUMBER USERS
+SLEEP=1
+
+{
+        sleep $SLEEP
+        echo "listplayers"
+        sleep $SLEEP
+        echo "exit"
+} | nc  localhost $port > $dir/$workfile
+
+# NUMBER USERS
 #$(sed ':a;N;$!ba;s/|/\n/g' $dir/$workfile | grep "client_nickname" > $dir/$workfile2)
 #$(rm -f "$dir/$workfile")
 #for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
