@@ -1,9 +1,3 @@
-[root@onestaufond status]# bash sevendaystodie.sh
-[root@onestaufond status]# cat se
-server.sh                sevendaystodie.sh        sevendaystodie_last.txt
-[root@onestaufond status]# cat se
-server.sh                sevendaystodie.sh        sevendaystodie_last.txt
-[root@onestaufond status]# cat sevendaystodie_last.txt
 2018-04-27T00:01:57 25238.772 INF Started thread TelnetClientSend_127.0.0.1:41928
 2018-04-27T00:01:58 25239.804 INF Executing command 'listplayers' by Telnet from 127.0.0.1:41928
 0. id=508, Zbrada, pos=(1678.8, 87.1, -1771.5), rot=(36.6, -1707.2, 0.0), remote=True, health=90, deaths=1, zombies=15, players=0, score=10, level=3, steamid=76561197995895159, ip=86.238.167.148, ping=30
