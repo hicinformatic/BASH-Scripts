@@ -45,6 +45,7 @@ SLEEP=1
 # NUMBER USERS
 $(sed -e '1,17d' < test.txt | head -n -1 > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
+$(awk -F "\"*,\"*" '{print $2}' $dir/$workfile2)
 #for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
 #do
 #    if [ -n "$client" ]
