@@ -59,7 +59,7 @@ $(rm -f "$dir/$workfile")
 #else
 #    $(sed -i "s/#{LIST}#/\"$client\"/g" $jsontmp)
 #fi
-$(rm -f $dir/$workfile2)
+#$(rm -f $dir/$workfile2)
 
 $(chown $user:$group $jsontmp)
 $(chmod $chmod $jsontmp)
