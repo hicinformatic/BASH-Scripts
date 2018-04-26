@@ -43,7 +43,7 @@ SLEEP=1
 } | nc  localhost $port > $dir/$workfile
 
 # NUMBER USERS
-$(sed -e '1,15d' < $dir/$workfile > $dir/$workfile2)
+$(sed -e '1,17d' < test.txt | head -n -2 > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
 #for u in `grep -Po '(?<=client_nickname=).*(?=\ client_type)' $dir/$workfile2 | grep -v $ts3user`
 #do
