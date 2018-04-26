@@ -43,7 +43,7 @@ SLEEP=1
 } | nc  localhost $port > $dir/$workfile
 
 # NUMBER USERS
-$(sed -e '1,17d' < test.txt | head -n -1 > $dir/$workfile2)
+$(sed -e '1,17d' < $dir/$workfile | head -n -1 > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
 for u in `awk -F "\"*, \"*" '{print $2}' $dir/$workfile2`
 do
