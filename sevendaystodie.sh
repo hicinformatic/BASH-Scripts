@@ -47,6 +47,7 @@ $(sed -e '1,17d' < test.txt | head -n -1 > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
 for u in `awk -F "\"*, \"*" '{print $2}' $dir/$workfile2`
 do
+    echo $u
     if [ -n "$client" ]
     then
         $(sed -i "s/#{LIST}#/\"$client\",\n        #{LIST}#/g" $jsontmp)
