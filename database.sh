@@ -1,8 +1,8 @@
 #!/bin/bash
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $dir/config/django.config 
+source $dir/config/database.config 
 jsontmp="$sysuser.json.tmp"
-$(cat $dir/json/django.json > $jsontmp)
+$(cat $dir/json/database.json > $jsontmp)
 
 # UPTIME
 uptime=$(ps -u $sysuser -o etimes,cmd | grep "$bind" | awk '{print $1}' | head -n1)
