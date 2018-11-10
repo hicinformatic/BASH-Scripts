@@ -39,7 +39,7 @@ $($rcon -H localhost -P $port -p $password "list" > $dir/$workfile)
 ## NUMBER USERS
 $(cut -c41- $dir/$workfile > $dir/$workfile2)
 $(sed -i "s/, /\n/g"  $dir/$workfile2)
-$(sed "s/\x1b\[[0-9;]*m//g" $dir/$workfile2 > $dir/$workfile
+$(sed "s/\x1b\[[0-9;]*m//g" $dir/$workfile2 > $dir/$workfile)
 $(rm -f "$dir/$workfile2")
 for u in `cat $dir/$workfile`
 do
