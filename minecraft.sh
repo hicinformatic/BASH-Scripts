@@ -37,9 +37,10 @@ SLEEP=1
 $($rcon -H localhost -P $port -p $password "list" > $dir/$workfile)
 
 ## NUMBER USERS
-$(sed -e '1,41d' < $dir/$workfile > $dir/$workfile2)
+$(cut -c41- $dir/$workfile > $dir/$workfile2)
 $(rm -f "$dir/$workfile")
-for u in `awk -F "\"*, \"*" '{print $2}' $dir/$workfile2`
+$(sed -i "s/, /\n/g"  $dir/$workfile2)
+for u in `cat $dir/$workfile2`
 do
     if [ -n "$client" ]
     then
